@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Signture Pad</title>
+    <meta name="viewport" content="width=device-width" />
+    <!-- <base href="/SignatureTest/"> -->
+
+    <script src="signature_pad.umd.min.js"></script>
+
+</head>
+
+<body>
+    <div>
+        <canvas id="signature-pad" class="signature-pad" width="400" height="200"></canvas>
+    </div>
+    <button id="save-button">
+        Save
+    </button>
+    <script>
+        var canvas = document.getElementById("signature-pad");
+
+        var signaturePad = new SignaturePad(canvas);
+
+        document.getElementById("save-button").addEventListener('click', function () {
+            var data = signaturePad.toDataURL();
+            console.log(data);
+            downloadURI(data, "test.png");
+        });
+
+
+        function downloadURI(uri, name) {
+            var link = document.createElement("a");
+            console.log(link);
+            link.download = name;
+            link.href = uri;
+            document.body.appendChild(link);
+            link.click();
+        }
+    </script>
+</body>
+
+</html>
